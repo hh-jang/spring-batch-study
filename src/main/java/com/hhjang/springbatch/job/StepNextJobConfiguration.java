@@ -2,10 +2,13 @@ package com.hhjang.springbatch.job;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.batch.core.BatchStatus;
+import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.listener.StepExecutionListenerSupport;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,12 +20,23 @@ public class StepNextJobConfiguration {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
+    private static final String JOB_STATUS_FAIL = "FAILED";
+
     @Bean
     public Job stepNextJob() {
         return jobBuilderFactory.get("stepNextJob")
                 .start(step1())
-                .next(step2())
-                .next(step3())
+                    .on(JOB_STATUS_FAIL)
+                    .to(step3())
+                    .on("*")
+                    .end()
+                .from(step1())
+                    .on("*")
+                    .to(step2())
+                    .next(step3())
+                    .on("*")
+                    .end()
+                .end()
                 .build();
     }
 
@@ -31,6 +45,7 @@ public class StepNextJobConfiguration {
         return stepBuilderFactory.get("step1")
                 .tasklet((contribution, chunkContext) -> {
                     log.info("--------------This is step1--------------");
+                    contribution.setExitStatus(ExitStatus.FAILED);        //
                     return RepeatStatus.FINISHED;
                 }).build();
     }
