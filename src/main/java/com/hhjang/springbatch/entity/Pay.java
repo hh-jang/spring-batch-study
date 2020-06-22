@@ -3,6 +3,7 @@ package com.hhjang.springbatch.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Pay {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
 

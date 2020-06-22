@@ -12,6 +12,8 @@ spring:
 # 기동 시 program arguments에 넘어온 job.name 해당 값이 일치하는 job만 실행하는 옵션
 # 값이 NONE일 경우 배치 실행을 막기 위함
 spring.batch.job.names: ${job.name:NONE}
+logging.level.org.springframework.batch: DEBUG
+---
 logging:
   level:
     org:
