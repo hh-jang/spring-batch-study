@@ -52,5 +52,10 @@ public class Pay {
         this.txDateTime = LocalDateTime.parse(txLocalDateTime, FORMATTER);
     }
 
+    public Pay(Long id, boolean successStatus) {
+        this.id = id;
+        this.successStatus = successStatus;
+    }
+
     public void success() {this.successStatus = true;}
 }

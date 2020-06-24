@@ -1,9 +1,12 @@
 package com.hhjang.springbatch.entity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
 public interface PayRepository extends JpaRepository<Pay, Long> {
-    public List<Pay> findAllBySuccessStatus();
+
+    @Query("SELECT p FROM Pay p WHERE p.successStatus = true")
+    List<Pay> findAllSuccess();
 }

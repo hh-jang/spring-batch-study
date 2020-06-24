@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.*;
 @SpringBootTest
 public class PayRepositoryTest {
     @Autowired
-    PayRepository repository;
+    private PayRepository repository;
 
     @Test
     public void create() {
@@ -37,7 +37,7 @@ public class PayRepositoryTest {
     @Test
     public void findAllBySuccessStatus() {
         // Given, When
-        List<Pay> allBySuccessStatus = repository.findAllBySuccessStatus();
+        List<Pay> allBySuccessStatus = repository.findAllSuccess();
 
         // Then
         assertThat(allBySuccessStatus.size()).isEqualTo(1);
