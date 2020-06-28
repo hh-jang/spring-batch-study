@@ -1,4 +1,4 @@
-package com.hhjang.springbatch.entity;
+package com.hhjang.springbatch.pay;
 
 import lombok.*;
 

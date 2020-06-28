@@ -1,7 +1,7 @@
 package com.hhjang.springbatch.job.ItemWriter;
 
-import com.hhjang.springbatch.entity.Pay;
-import com.hhjang.springbatch.entity.Pay2;
+import com.hhjang.springbatch.pay.Pay;
+import com.hhjang.springbatch.pay.Pay2;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -9,7 +9,6 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.item.ItemProcessor;
-import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.JpaItemWriter;
 import org.springframework.batch.item.database.JpaPagingItemReader;
 import org.springframework.batch.item.database.builder.JpaItemWriterBuilder;
