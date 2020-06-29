@@ -38,6 +38,7 @@ public class JpaPagingItemReaderJobConfiguration {
 
     private static final int MAXIMUM_CHUNK_SIZE = 10;
 
+    // temp
     @Bean
     @JobScope
     public Job jpaPagingItemReaderJob() {
