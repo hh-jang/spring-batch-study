@@ -1,5 +1,7 @@
 package com.hhjang.springbatch.teacher;
 
+import com.hhjang.springbatch.entity.teacher.Teacher;
+import com.hhjang.springbatch.entity.teacher.TeacherRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

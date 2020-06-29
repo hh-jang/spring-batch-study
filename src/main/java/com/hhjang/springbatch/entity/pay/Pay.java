@@ -1,4 +1,4 @@
-package com.hhjang.springbatch.pay;
+package com.hhjang.springbatch.entity.pay;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

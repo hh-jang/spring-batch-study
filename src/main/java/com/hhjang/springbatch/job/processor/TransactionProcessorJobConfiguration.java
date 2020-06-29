@@ -1,5 +1,6 @@
 package com.hhjang.springbatch.job.processor;
 
+import com.hhjang.springbatch.entity.classinformation.ClassInformation;
 import com.hhjang.springbatch.entity.teacher.Teacher;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +20,7 @@ import javax.persistence.EntityManagerFactory;
 @Slf4j
 @AllArgsConstructor
 @Configuration
-public class ProcessorFilterJobConfiguration {
+public class TransactionProcessorJobConfiguration {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
     private final EntityManagerFactory entityManagerFactory;
@@ -27,47 +28,40 @@ public class ProcessorFilterJobConfiguration {
     private static final int MAXIMUM_CHUNK_SIZE = 10;
 
     @Bean
-    public Job processorFilterJob() {
-        return jobBuilderFactory.get("processorFilterJob")
-                .start(processorFilterStep())
+    public Job transactionProcessorJob() {
+        return jobBuilderFactory.get("transactionProcessorJob")
+                .start(transactionProcessorStep())
                 .build();
     }
 
     @Bean
-    public Step processorFilterStep() {
-        return stepBuilderFactory.get("processorFilterStep")
-                .<Teacher, String>chunk(MAXIMUM_CHUNK_SIZE)
-                .reader(processorFilterReader())
-                .processor(processorFilterProcessor())
-                .writer(processorFilterWriter())
+    public Step transactionProcessorStep() {
+        return stepBuilderFactory.get("transactionProcessorStep")
+                .<Teacher, ClassInformation>chunk(MAXIMUM_CHUNK_SIZE)
+                .reader(transactionProcessorReader())
+                .processor(transactionProcessorProcessor())
+                .writer(transactionProcessorWriter())
                 .build();
     }
 
-    private ItemWriter<String> processorFilterWriter() {
+    private ItemWriter<ClassInformation> transactionProcessorWriter() {
         return items -> {
             items.stream().forEach(o -> {
-                log.info("teacher id : {}", o);
+                log.info("class information : {}", o);
             });
         };
     }
 
-    private ItemProcessor<Teacher, String> processorFilterProcessor() {
-        return teach -> {
-            boolean isEven = false;
-
-            if(teach.getId() % 2 == 0) isEven = true;
-
-            if(isEven) return teach.getName();
-
-            log.info("id is Odd target ignore, id : {}", teach.getId());
-            return null;
+    private ItemProcessor<Teacher, ClassInformation> transactionProcessorProcessor() {
+        return teacher -> {
+            return new ClassInformation(teacher.getName(), teacher.getStudents().size());
         };
     }
 
-    private JpaPagingItemReader<Teacher> processorFilterReader() {
+    private JpaPagingItemReader<Teacher> transactionProcessorReader() {
         return new JpaPagingItemReaderBuilder<Teacher>()
                 .entityManagerFactory(entityManagerFactory)
-                .name("processorFilterReader")
+                .name("transactionProcessorReader")
                 .pageSize(MAXIMUM_CHUNK_SIZE)
                 .queryString("SELECT t FROM Teacher t")
                 .build();

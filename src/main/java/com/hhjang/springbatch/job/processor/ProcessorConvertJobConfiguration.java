@@ -1,6 +1,6 @@
 package com.hhjang.springbatch.job.processor;
 
-import com.hhjang.springbatch.teacher.Teacher;
+import com.hhjang.springbatch.entity.teacher.Teacher;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
 
 @Slf4j
 @AllArgsConstructor
@@ -40,11 +39,11 @@ public class ProcessorConvertJobConfiguration {
                 .<Teacher, String>chunk(MAXIMUM_CHUNK_SIZE)
                 .reader(processorConvertReader())
                 .processor(processorConvertProcessor())
-                .writer(processorConvertWeiter())
+                .writer(processorConvertWriter())
                 .build();
     }
 
-    private ItemWriter<String> processorConvertWeiter() {
+    private ItemWriter<String> processorConvertWriter() {
         return items -> {
             items.stream().forEach(o -> {
                 log.info("teacher name : {}", o);

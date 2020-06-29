@@ -1,7 +1,7 @@
 package com.hhjang.springbatch.job.itemreader;
 
-import com.hhjang.springbatch.pay.Pay;
-import com.hhjang.springbatch.pay.PayRepository;
+import com.hhjang.springbatch.entity.pay.Pay;
+import com.hhjang.springbatch.entity.pay.PayRepository;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;

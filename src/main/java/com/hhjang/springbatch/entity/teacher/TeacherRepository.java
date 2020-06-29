@@ -1,4 +1,4 @@
-package com.hhjang.springbatch.teacher;
+package com.hhjang.springbatch.entity.teacher;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
