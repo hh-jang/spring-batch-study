@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.*;
 @SpringBootTest
 public class PayRepositoryTest {
     @Autowired
-    PayRepository repository;
+    private PayRepository repository;
 
     @Test
     public void create() {
