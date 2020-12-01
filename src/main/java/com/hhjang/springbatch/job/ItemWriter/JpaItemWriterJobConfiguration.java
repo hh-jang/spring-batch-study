@@ -48,7 +48,7 @@ public class JpaItemWriterJobConfiguration {
     }
 
     private ItemProcessor<Pay, Pay2> jpaItemWriterProcessor() {
-        return pay -> new Pay2(pay.getAmount(), pay.getTxName(), pay.getTxDateTime());
+        return pay -> new Pay2(pay.getAmount(), pay.getTxName(), pay.getTxDate());
     }
 
     private JpaPagingItemReader<Pay> jpaItemWriterReader() {

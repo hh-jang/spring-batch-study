@@ -4,12 +4,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.time.LocalDate;
 
 @Repository
-public interface PayRepository extends JpaRepository<Pay, Long> {
-    @Query("SELECT p FROM Pay p WHERE p.successStatus = true")
-    List<Pay> findAllSuccess();
+public interface PaySumRepository extends JpaRepository<PaySum, Long> {
 
-    List<Pay> findByAmount(Long amount);
+    @Query("SELECT p FROM PaySum p WHERE p.tradeDate =:tradeDate")
+    PaySum findAllByTradeDate(LocalDate tradeDate);
 }

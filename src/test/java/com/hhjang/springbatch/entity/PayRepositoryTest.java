@@ -6,15 +6,18 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@ActiveProfiles("local")
 public class PayRepositoryTest {
     @Autowired
     private PayRepository repository;
@@ -25,7 +28,7 @@ public class PayRepositoryTest {
         Pay pay = new Pay();
         pay.setAmount(1000L);
         pay.setTxName("test tx");
-        pay.setTxDateTime(LocalDateTime.now());
+        pay.setTxDate(LocalDate.now());
         pay.setSuccessStatus(true);
 
         // When
