@@ -28,7 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = {BatchIntegrationTestJobConfiguration.class, TestBatchConfig.class})
 @SpringBatchTest
 @ActiveProfiles("local")
-public class BatchTestJobConfigurationIntegrationTest {
+public class BatchIntegrationTestJobConfigurationTest {
 
     @Autowired
     private JobLauncherTestUtils jobLauncherTestUtils;
