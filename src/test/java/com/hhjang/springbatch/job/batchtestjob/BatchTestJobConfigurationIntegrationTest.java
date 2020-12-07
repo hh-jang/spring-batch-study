@@ -20,16 +20,15 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-import static com.hhjang.springbatch.job.batchtestjob.BatchTestJobConfiguration.FORMATTER;
+import static com.hhjang.springbatch.job.batchtestjob.BatchIntegrationTestJobConfiguration.FORMATTER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = {BatchTestJobConfiguration.class, TestBatchConfig.class})
+@SpringBootTest(classes = {BatchIntegrationTestJobConfiguration.class, TestBatchConfig.class})
 @SpringBatchTest
 @ActiveProfiles("local")
-public class BatchTestJobConfigurationTest {
+public class BatchTestJobConfigurationIntegrationTest {
 
     @Autowired
     private JobLauncherTestUtils jobLauncherTestUtils;

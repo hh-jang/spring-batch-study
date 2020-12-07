@@ -28,7 +28,7 @@ import java.util.Map;
 @Configuration
 @Slf4j
 @RequiredArgsConstructor
-public class BatchTestJobConfiguration {
+public class BatchIntegrationTestJobConfiguration {
 
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final int CHUNK_SIZE = 50;
